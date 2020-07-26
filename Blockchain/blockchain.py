@@ -1,6 +1,5 @@
-# Used: Flask and Postman
 import datetime, hashlib, json
-from flask import Flask, jsonify
+from flask import Flask, Blueprint, jsonify
 
 # PART 1 - BUILD BLOCKCHAIN
 
@@ -55,12 +54,11 @@ class Blockchain:
 
 # PART 2 - MINE BLOCKCHAIN
 
-app = Flask(__name__)
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+api = Blueprint('api', __name__)
 
 blockchain = Blockchain()
 
-@app.route('/mine_block', methods = ['GET'])
+@api.route('/mine_block', methods = ['GET'])
 def mine_block():
     previous_block = blockchain.get_previous_block()
     previous_proof = previous_block['proof']
@@ -76,7 +74,7 @@ def mine_block():
     }
     return jsonify(response), 200
 
-@app.route('/get_chain', methods = ['GET'])
+@api.route('/get_chain', methods = ['GET'])
 def get_chain():
     response = {
         'chain': blockchain.chain,
@@ -84,7 +82,7 @@ def get_chain():
     }
     return jsonify(response), 200
 
-@app.route('/is_valid', methods = ['GET'])
+@api.route('/is_valid', methods = ['GET'])
 def is_valid():
     is_valid = blockchain.is_chain_valid(blockchain.chain)
     response = {
@@ -92,4 +90,11 @@ def is_valid():
     }
     return jsonify(response), 200
 
-app.run(host = '0.0.0.0', port = 5000)
+
+if __name__ == "__main__":
+    app = Flask(__name__)
+    app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+    
+    app.register_blueprint(api)
+    
+    app.run(host = '0.0.0.0', port = 5000)
