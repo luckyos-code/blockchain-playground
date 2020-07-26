@@ -1,2 +1,1 @@
-# blockchain-playground
-Implementing a Blockchain, Cryptocurrency and Smart Contract
+Example implementation from Udemy course Blockchain A-Z™: Learn How To Build Your First Blockchain
