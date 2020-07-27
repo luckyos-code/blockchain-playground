@@ -9,7 +9,7 @@
     * Run all nodes and connect them in Postman with connect_node
     * Use Postman to interact with the api
     
-3) **Smart Contract**: ICO for a token using a Solidity based Smart Contract
+3) **Smart Contract**: ICO for a Ethereum token using a Solidity based Smart Contract
     * Requirements: Ganache, MyEtherWallet (download repo for offline use), Remix - Ethereum IDE
     * Start a Ganache Ethereum blockchain
     * Create new custon network / node in the offline MyEtherWallet instance (values from Ganache)
